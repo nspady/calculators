@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+h1, h2 {
+    color: #343a40;
+}
+
+#calcForm {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+input[type="number"], input[type="range"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    color: #495057;
+    margin-bottom: 20px;
+}
+
+#paceDisplay, #totalTimeDisplay {
+    font-size: 1.2em;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    text-align: center;
+    color: #495057;
+}
+
+table th {
+    background-color: #e9ecef;
+}

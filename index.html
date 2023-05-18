@@ -1,83 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        label, input, button {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        #result {
-            margin-top: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Running Pace Calculator</title>
 </head>
 <body>
-    <div class="container">
-        <label for="distance">Distance (miles):</label>
-        <input type="number" id="distance" min="0" value="13.1" oninput="calculateTime()">
+    <h1>Running Pace Calculator</h1>
+    <div id="calcForm">
+        <label for="pace">Pace (mm:ss per mile/km): <span id="paceDisplay">10:00</span></label>
+        <input type="range" id="pace" min="180" max="1200" value="600">
+        
+        <label for="unit">Unit:</label>
+        <select id="unit">
+            <option value="miles" selected>Miles</option>
+            <option value="km">Kilometers</option>
+        </select>
+        
+        <label for="distance">Custom distance:</label>
+        <input type="number" id="distance" value="13.1">
 
-        <label for="pace">Pace (mm:ss per mile):</label>
-        <input type="range" id="pace" min="220" max="1000" value="600" oninput="updatePace(this.value)">
-        <span id="paceValue">10:00</span>
-
-        <div id="result"></div>
-        <div id="commonDistances"></div>
+        <p>Time: <span id="totalTimeDisplay">00:00:00</span></p>
     </div>
+    
+    <h2>Race Times</h2>
+    <table id="raceTimes">
+        <tr>
+            <th>Race</th>
+            <th>Time</th>
+        </tr>
+        <tr>
+            <td>5K</td>
+            <td id="time5k">00:00:00</td>
+        </tr>
+        <tr>
+            <td>10K</td>
+            <td id="time10k">00:00:00</td>
+        </tr>
+        <tr>
+            <td>Half Marathon</td>
+            <td id="timeHalf">00:00:00</td>
+        </tr>
+        <tr>
+            <td>Full Marathon</td>
+            <td id="timeFull">00:00:00</td>
+        </tr>
+        <tr>
+            <td>50K</td>
+            <td id="time50k">00:00:00</td>
+        </tr>
+        <tr>
+            <td>50 Mile</td>
+            <td id="time50m">00:00:00</td>
+        </tr>
+    </table>
 
-    <script>
-        var commonDistances = {
-            '5k': 3.1,
-            '10k': 6.2,
-            'Half Marathon': 13.1,
-            'Full Marathon': 26.2,
-            '50k': 31.07,
-            '50 Mile': 50
-        };
-
-        function updatePace(value) {
-            var minutes = Math.floor(value / 60);
-            var seconds = value % 60;
-            document.getElementById('paceValue').innerHTML = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-            calculateTime();
-        }
-
-        function calculateTime() {
-            var distance = document.getElementById('distance').value;
-            var pace = document.getElementById('pace').value;
-
-            var totalSeconds = Math.round(pace * distance);
-            var hours = Math.floor(totalSeconds / 3600);
-            totalSeconds %= 3600;
-            var minutes = Math.floor(totalSeconds / 60);
-            var seconds = totalSeconds % 60;
-
-            document.getElementById('result').innerHTML = 'Total Time to complete (' + distance + '): ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds<br><br>';
-
-            var commonDistancesDiv = document.getElementById('commonDistances');
-            commonDistancesDiv.innerHTML = '';
-            for (var key in commonDistances) {
-                totalSeconds = Math.round(pace * commonDistances[key]);
-                hours = Math.floor(totalSeconds / 3600);
-                totalSeconds %= 3600;
-                minutes = Math.floor(totalSeconds / 60);
-                seconds = totalSeconds % 60;
-
-                commonDistancesDiv.innerHTML += '<strong>' + key + '</strong>: ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds<br><br>';
-            }
-        }
-
-        window.onload = calculateTime;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
